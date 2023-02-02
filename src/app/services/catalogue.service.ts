@@ -31,11 +31,18 @@ export class CatalogueService {
     }
     
     const apiUrl: string = `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`;
+    
     this.http.get<FetchPokemonListResponse>(apiUrl)
       .subscribe({
         next: (response: FetchPokemonListResponse) => {
-          sessionStorage.setItem("pokemonList", JSON.stringify(response.results))
-          this._pokemonList = response.results;
+          
+          const pokemonData =  response.results.map(pokemon => ({
+            ...pokemon,
+            id: Number(pokemon.url.split('/').slice(-2, -1))
+          }));
+
+          sessionStorage.setItem("pokemonList", JSON.stringify(pokemonData))
+          this._pokemonList = pokemonData;
         },
         error: (error: HttpErrorResponse) => {
           console.log(error)
