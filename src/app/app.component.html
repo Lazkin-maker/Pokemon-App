@@ -2,8 +2,8 @@
   <nav>
     <ul>
       <!-- <li><a href="#">Login Page</a></li> -->
-      <li><a href="/trainer">Trainer Page</a></li>
-      <li><a href="/catalogue">Pokemon Catalogue</a></li>
+      <li><a routerLink="/trainer">Trainer Page</a></li>
+      <li><a routerLink="/catalogue">Pokemon Catalogue</a></li>
       <li *ngIf="!isLoginPage" id="logOut-btn" (click)="handleLogOut()"><button>Logout</button></li>
     </ul>
   </nav>

@@ -1,0 +1,6 @@
+.card {
+    display: flex;
+    border: 1px solid gray;
+    width: 400px;
+    list-style: none;
+}

@@ -1,0 +1,4 @@
+<li *ngIf="pokemon" class="card">
+    <img src="{{ baseUrl + pokemon.url.split('/').slice(-2, -1) }}.png" [alt]="pokemon.name">
+    <h5>{{ pokemon.name }}</h5>
+</li>
