@@ -1,0 +1,14 @@
+<form #loginForm="ngForm" (ngSubmit)="loginSubmit(loginForm)">
+    <div class="Box">
+      <label for="username">Username:</label>
+      <input type="text" id="username" 
+      ngModel
+      #username="ngModel"
+      name="username" placeholder="Name..">
+    </div>
+   
+    <button type="submit">Login</button>
+  </form>
+
+
+ 
