@@ -9,13 +9,12 @@ import { StorageUtil } from '../utils/storage.util';
 })
 export class UserService {
 
-  private _user? :Trainer;  // ? means (User | undefined) 
-  
+  private _user?: Trainer;  // ? means (User | undefined) 
   get user(): Trainer | undefined {
     return this._user;
   }
-  
-  set user(user : Trainer | undefined){
+
+  set user(user: Trainer | undefined) {
     StorageUtil.storageSave<Trainer>(StorageKeys.Trainer, user!); // ! this means that user should not be undefined here..
     this._user = user;
   }
@@ -42,4 +41,12 @@ export class UserService {
       this._user.pokemon = this._user.pokemon.filter((pokemon: Pokemon) => pokemon.id !== pokemonId)
     }
   }
+
+  // public inTrainer(pokemonId: number): boolean {
+  //   if (this._user) {
+  //     return Boolean(this.user?.pokemon.find((pokemon: Pokemon) => pokemon.id === pokemonId))
+
+  //   }
+  //   return false;
+  // }
 }

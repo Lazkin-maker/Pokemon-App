@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CollectionService } from './collection.service';
+import { CollectedPokeService } from './collected-poke.service';
 
-describe('CollectionService', () => {
-  let service: CollectionService;
+describe('CollectedPokeService', () => {
+  let service: CollectedPokeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CollectionService);
+    service = TestBed.inject(CollectedPokeService);
   });
 
   it('should be created', () => {
