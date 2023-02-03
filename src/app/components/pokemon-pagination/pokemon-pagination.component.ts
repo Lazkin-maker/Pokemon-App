@@ -9,6 +9,7 @@ import { Pokemon } from 'src/app/models/pokemon.model';
 export class PokemonPaginationComponent {
 
   @Input() pokemonList: Pokemon[] = [];;
+  @Input() releasePokemon!: void;
   page: number = 1;
 
 }

@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon.model';
+import { Trainer } from 'src/app/models/trainer.model';
+import { CollectionService } from 'src/app/services/collection.service';
 
 @Component({
   selector: 'app-pokemon-list-item',
@@ -12,8 +15,19 @@ export class PokemonListItemComponent {
 
   public baseUrl: string = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
-  // ngOnInit() {
-  //   const pokemonId = this.pokemon?.url.slice(-2, -1) || "1";
-  //   this.spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
-  // }
+  constructor(
+    private readonly collectionService: CollectionService
+  ) { }
+
+  public releaseOnClick(pokemonId: number): void {
+    this.collectionService.releasePokemon(pokemonId)
+      .subscribe({
+        next: (response: Trainer) => {
+          console.log("released pokemon")
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log("ERROR", error.message)
+        }
+      })
+  }
 }
