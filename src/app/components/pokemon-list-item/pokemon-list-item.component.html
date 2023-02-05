@@ -6,8 +6,8 @@
     <ng-container *ngIf="currentUrl === '/trainer'; then trainer else catalogue"></ng-container>
         
     <ng-template #catalogue>
-        <button (click)="onCollectedPoke(pokemon.id)"  class="bg-green-500 text-white text-sm font-bold px-2 py-1 ml-auto rounded">
-            Collect
+        <button (click)="onCollectedPoke(pokemon.id)" [disabled]="isCollected(pokemon.id)" class="bg-green-500 text-white text-sm font-bold px-2 py-1 ml-auto rounded disabled:bg-gray-500">
+            {{ isCollected(pokemon.id) ? "Collected" : "Collect" }}
         </button>
 
         <img *ngIf="isCollected(pokemon.id)" src="/assets/images/pokeball.png" class="absolute top-1 right-1 w-6">

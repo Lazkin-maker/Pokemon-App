@@ -1,0 +1,8 @@
+.pagination-controls {
+    text-align: center;
+}
+
+.pagination-controls ::ng-deep .ngx-pagination .current {
+    /* background-color: transparent; */
+    border-radius: 3px;
+}
