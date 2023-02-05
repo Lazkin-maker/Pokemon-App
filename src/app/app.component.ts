@@ -12,14 +12,11 @@ import { CatalogueService } from './services/catalogue.service';
 export class AppComponent implements OnInit {
   title = 'pokemonApp';
   isLoginPage = false;
+
   constructor(
     private readonly catalogueService: CatalogueService,
-    private router: Router) {}
-
-  handleLogOut() : void{
-    sessionStorage.removeItem(StorageKeys.Trainer);
-    this.router.navigateByUrl("/login");
-  }
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.catalogueService.fetchPokemonList();
