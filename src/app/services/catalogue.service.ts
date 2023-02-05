@@ -34,8 +34,6 @@ export class CatalogueService {
       return;
     }
 
-    // const apiUrl: string = `https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`;
-
     this.http.get<FetchPokemonListResponse>(apiUrl)
       .subscribe({
         next: (response: FetchPokemonListResponse) => {
@@ -54,6 +52,7 @@ export class CatalogueService {
         }
       })
   }
+
   public pokemonById(id :number) : Pokemon | undefined{
       return this._pokemonList.find((pokemon: Pokemon) => pokemon.id === id);
   }
