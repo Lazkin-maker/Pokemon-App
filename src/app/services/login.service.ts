@@ -12,13 +12,14 @@ const {apiUsers, apiKey} = environment;
 })
 export class LoginService {
 
-   //Dependency Injection
-   constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
-   // Models, HttpClient ,Observables, and RxJS operators.
- 
-   // login
-   public login(username : string) : Observable<Trainer> { //login function will return an Observable and the type of the Observable will be a User (user model).
+  /**
+   * Login to application using a username
+   * @param username Name of user you want to login as
+   * @returns A user object from database
+   */
+  public login(username : string) : Observable<Trainer> { //login function will return an Observable and the type of the Observable will be a User (user model).
     return this.checkUsername(username)
     .pipe(
       switchMap((trainer : Trainer | undefined) =>{
@@ -26,30 +27,30 @@ export class LoginService {
             return this.createUser(username); //create new one
         }         
         return of(trainer); //otherwise return user..
-      // }),
-      // tap((user: User) =>{
-      //     StorageUtil.storageSave<User>(StorageKeys.User, user)
       })
     )
 }
 
 
 
-// check if user exists
+/**
+ * Check if a user exists in the database
+ * @param username Name of user you want check
+ * @returns Observable of user or undefined
+ */
 private checkUsername(username: string) : Observable<Trainer | undefined> {
   return this.http.get<Trainer[]>(`${apiUsers}?username=${username}`)
   .pipe(
-    //RxJS operator
-    // map((response : User[]) =>{
-    //   return response.pop();
-    // })
-
-    map((response : Trainer[]) => response.pop()) // if the array is empty ==> return undefind.
+    map((response : Trainer[]) => response.pop()) // if the array is empty ==> returns undefind.
   )
 }
 
 
-// IF not user - Create a User
+/**
+ * Create a new user in database
+ * @param username Desired username of new user
+ * @returns Newly created user object
+ */
 private createUser(username : string) : Observable<Trainer> {
   //trainer
   const trainer = {

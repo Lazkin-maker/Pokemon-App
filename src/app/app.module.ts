@@ -12,6 +12,7 @@ import { CataloguePage } from './pages/catalogue/catalogue.page';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { PokemonListItemComponent } from './components/pokemon-list-item/pokemon-list-item.component';
 import { PokemonPaginationComponent } from './components/pokemon-pagination/pokemon-pagination.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PokemonPaginationComponent } from './components/pokemon-pagination/poke
     CataloguePage,
     LoginFormComponent,
     PokemonListItemComponent,
-    PokemonPaginationComponent
+    PokemonPaginationComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

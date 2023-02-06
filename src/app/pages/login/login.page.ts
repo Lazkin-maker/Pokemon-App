@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageUtil } from 'src/app/utils/storage.util';
 import {StorageKeys} from '../../enums/storage-keys.enum'
 
 
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit(){
-    const loggedInUser = sessionStorage.getItem(StorageKeys.Trainer);
+    const loggedInUser = StorageUtil.storageRead(StorageKeys.Trainer);
     if(loggedInUser){
       this.router.navigateByUrl("/catalogue")
     }

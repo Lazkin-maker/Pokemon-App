@@ -10,6 +10,6 @@ export class PokemonPaginationComponent {
 
   @Input() pokemonList: Pokemon[] = [];;
   @Input() releasePokemon!: void;
-  page: number = 1;
+  public page: number = 1;
 
 }

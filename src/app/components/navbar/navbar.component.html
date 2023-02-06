@@ -1,0 +1,14 @@
+<nav class="sticky top-0 w-full flex justify-between items-center px-20 bg-slate-200 z-50 py-2">
+    <img src="/assets/images/pokemon-logo.png" alt="pokemon logo" class="h-20">
+    <ul class="flex">
+        <li class="mr-8 p-3 bg-blue-400 text-white font-bold rounded">
+            <a routerLink="/trainer">Trainer Page</a>
+        </li>
+        <li class="mr-8 p-3 bg-blue-400  text-white font-bold rounded">
+            <a routerLink="/catalogue">Pokemon Catalogue</a>
+        </li>
+        <li *ngIf="!isLoginPage" (click)="handleLogOut()" class="p-3 bg-red-500 text-white font-bold rounded">
+            <button>Logout</button>
+        </li>
+    </ul>
+</nav>
