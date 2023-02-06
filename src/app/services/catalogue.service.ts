@@ -13,18 +13,16 @@ const { apiUrl } = environment;
 export class CatalogueService {
 
   private _pokemonList: Pokemon[] = [];
-  private _error: string = "";
 
   get pokemonList(): Pokemon[] {
     return this._pokemonList;
   }
 
-  get error(): string {
-    return this._error;
-  }
-
   constructor(private readonly http: HttpClient) { }
 
+  /**
+   * Fetch a list of all pokemon and save it in application state and sessionStorage
+   */
   public fetchPokemonList(): void {
 
     const storedPokemon = sessionStorage.getItem("pokemonList")
@@ -47,12 +45,16 @@ export class CatalogueService {
           this._pokemonList = pokemonData;
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error)
-          this._error = error.message;
+          console.log("Error: ", error.message)
         }
       })
   }
 
+  /**
+   * Find a pokemon by its ID
+   * @param id ID of the pokemon you want to find 
+   * @returns A pokemon with the matching id, else undefined
+   */
   public pokemonById(id :number) : Pokemon | undefined{
       return this._pokemonList.find((pokemon: Pokemon) => pokemon.id === id);
   }

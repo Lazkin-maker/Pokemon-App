@@ -19,22 +19,21 @@ export class LoginFormComponent {
     private readonly userService :UserService,
     private readonly loginService : LoginService){}
 
-  public loginSubmit(loginForm : NgForm) : void{
-    //username!
-
+  /**
+   * Handles login logic for when user logs in
+   * @param loginForm A NgForm element
+   */
+  public loginSubmit(loginForm : NgForm) : void {
     const {username} = loginForm.value;
-    console.log(username);
     
     this.loginService.login(username)
       .subscribe({
         next: (user : Trainer) =>{
-            // User - do we need the user ?
-            // this.router.navigateByUrl("/catalogue") We would avoid to redirect in the form. Instead we use @outPut
             this.userService.user = user;
             this.login.emit();
           },
-        error: () =>{
-
+        error: (error) =>{
+          console.log("loginSubmit: " + error.message)
         }
       })
   }

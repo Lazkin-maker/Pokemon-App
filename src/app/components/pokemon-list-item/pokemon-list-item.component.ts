@@ -31,25 +31,15 @@ export class PokemonListItemComponent {
     this.pokemonAvatarUrl = PublicURLs.pokemonAvatars;
   }
 
+  /**
+   * Remove a pokemon from the current trainers collection
+   * @param pokemonId ID of pokemon you want to release
+   */
   public releaseOnClick(pokemonId: number): void {
     this.collectService.releasePokemon(pokemonId)
       .subscribe({
         next: (response: Trainer) => {
-          console.log("released pokemon")
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log("ERROR", error.message)
-        }
-      })
-  }
-
-  public onCollectedPoke(pokemonId: number): void {
-    this.collectService.addToTrainer(pokemonId)
-      .subscribe({
-        next: (response: Trainer) => {
-          console.log("Next", response);
-
-
+          alert("Successfully released pokemon")
         },
         error: (error: HttpErrorResponse) => {
           console.log("Error", error.message)
@@ -57,6 +47,26 @@ export class PokemonListItemComponent {
       })
   }
 
+  /**
+   * Add pokemon to the current trainers collection
+   * @param pokemonId ID of pokemon you want to collect
+   */
+  public onCollectedPoke(pokemonId: number): void {
+    this.collectService.addToTrainer(pokemonId)
+      .subscribe({
+        next: (response: Trainer) => {
+          alert("Successfully collected pokemon");
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log("Error", error.message);
+        }
+      })
+  }
+
+  /**
+   * Check whether or not a pokemon exists in the current trainers collection 
+   * @param pokemonId ID of pokemon you want to check
+   */
   public isCollected(pokemonId: number): boolean {
     return this.userService.isCollected(pokemonId)
   }

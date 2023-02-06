@@ -27,22 +27,26 @@ export class CollectedPokeService {
     private readonly userService : UserService
   ) { }
 
-  //Patch request with the userId and the pokemon
+  /**
+   * Add pokemon to the current trainers collection
+   * @param pokemonId ID of pokemon you want to collect
+   */
   public addToTrainer(pokemonId : number) : Observable<Trainer> {
       if(!this.userService.user){
         throw new Error("addToTrainer:there is no pokemon");
       }
-      const user : Trainer = this.userService.user;
 
+      const user : Trainer = this.userService.user;
       const pokemon : Pokemon | undefined = this.pokemonCatalogueService.pokemonById(pokemonId);
 
-      if(!pokemon){
+      if (!pokemon){
         throw new Error("addToTrainer :No pokemon with id:" + pokemonId );
       }
-      if(this.userService.isCollected(pokemonId)){
+
+      if (this.userService.isCollected(pokemonId)){
         throw new Error("addToTrainer :Pokemon already in trainer" );   
       }
-      console.log("Before request!")
+
       const headers = new HttpHeaders({
         'content-type' : 'application/json',
         'x-api-key' : apiKey
@@ -65,7 +69,10 @@ export class CollectedPokeService {
       )
   }
 
-
+  /**
+   * Remove a pokemon from the current trainers collection
+   * @param pokemonId ID of pokemon you want to release
+   */
   public releasePokemon(pokemonId: number): Observable<Trainer> {
 
     if (!this.userService.user) {
@@ -88,12 +95,7 @@ export class CollectedPokeService {
     })
       .pipe(
         tap((updatedUser: Trainer) => {
-          console.log("does this run???")
           this.userService.user = updatedUser;
-        }),
-        finalize(() => {
-          console.log("finalized!")
-        })
-      )
+        }))
   }
 }

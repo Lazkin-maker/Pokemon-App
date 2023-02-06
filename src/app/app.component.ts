@@ -25,7 +25,5 @@ export class AppComponent implements OnInit {
         this.isLoginPage = this.router.url === '/login';       
       }
     });
-
-    
   }
 }
