@@ -1,8 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environment.prod';
+import { StorageKeys } from '../enums/storage-keys.enum';
 import { FetchPokemonListResponse } from '../models/fetchPokemonListResponse.model';
 import { Pokemon } from '../models/pokemon.model';
+import { StorageUtil } from '../utils/storage.util';
 
 
 const { apiUrl } = environment;
@@ -25,10 +27,10 @@ export class CatalogueService {
    */
   public fetchPokemonList(): void {
 
-    const storedPokemon = sessionStorage.getItem("pokemonList")
+    const storedPokemon: Pokemon[] | undefined = StorageUtil.storageRead(StorageKeys.PokemonList)
 
-    if (storedPokemon !== null) {
-      this._pokemonList = JSON.parse(storedPokemon)
+    if (storedPokemon) {
+      this._pokemonList = storedPokemon
       return;
     }
 
@@ -41,7 +43,7 @@ export class CatalogueService {
             id: Number(pokemon.url.split('/').slice(-2, -1))
           }));
 
-          sessionStorage.setItem("pokemonList", JSON.stringify(pokemonData))
+          StorageUtil.storageSave(StorageKeys.PokemonList, pokemonData)
           this._pokemonList = pokemonData;
         },
         error: (error: HttpErrorResponse) => {

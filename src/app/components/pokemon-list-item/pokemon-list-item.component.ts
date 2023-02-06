@@ -39,7 +39,7 @@ export class PokemonListItemComponent {
     this.collectService.releasePokemon(pokemonId)
       .subscribe({
         next: (response: Trainer) => {
-          alert("Successfully released pokemon")
+          // console.log("Successfully released pokemon")
         },
         error: (error: HttpErrorResponse) => {
           console.log("Error", error.message)
@@ -55,7 +55,7 @@ export class PokemonListItemComponent {
     this.collectService.addToTrainer(pokemonId)
       .subscribe({
         next: (response: Trainer) => {
-          alert("Successfully collected pokemon");
+          // console.log("Successfully collected pokemon");
         },
         error: (error: HttpErrorResponse) => {
           console.log("Error", error.message);

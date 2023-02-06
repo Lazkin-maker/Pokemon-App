@@ -26,4 +26,12 @@ export class StorageUtil {
         return undefined;
       }
     }
+
+    /**
+     * Remove a key/value pair from sessionStorage
+     * @param key Key of value you want to remove
+     */
+    public static storageRemove<T>(key: string) {
+      sessionStorage.removeItem(key);
+    }
 }
